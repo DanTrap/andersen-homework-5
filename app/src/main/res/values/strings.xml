@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">homework-5</string>
+    <string name="person_photo">Person Photo</string>
+    <string name="phone_icon">Phone icon</string>
 </resources>
