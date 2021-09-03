@@ -2,4 +2,8 @@
     <string name="app_name">homework-5</string>
     <string name="person_photo">Person Photo</string>
     <string name="phone_icon">Phone icon</string>
+    <string name="first_name">First name</string>
+    <string name="second_name">Second name</string>
+    <string name="save_changes">Save changes</string>
+    <string name="number">Number</string>
 </resources>

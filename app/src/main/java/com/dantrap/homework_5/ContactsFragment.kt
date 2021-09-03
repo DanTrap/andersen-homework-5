@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dantrap.homework_5.databinding.FragmentContactsBinding
 
-class ContactsFragment : Fragment() {
+class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
 
     private var _binding: FragmentContactsBinding? = null
     private val binding get() = _binding!!
@@ -21,7 +22,7 @@ class ContactsFragment : Fragment() {
         ContactInfo("Aleksandr", "Pushkin", "+79000000004", R.color.nuclear_waste)
     )
 
-    private val contactAdapter by lazy { ContactsAdapter(contactList) }
+    private val contactAdapter by lazy { ContactsAdapter(contactList, this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +35,6 @@ class ContactsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupRecyclerView()
     }
 
@@ -47,7 +47,20 @@ class ContactsFragment : Fragment() {
         with(binding.recyclerView) {
             adapter = contactAdapter
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+            addItemDecoration(
+                DividerItemDecoration(
+                    requireContext(),
+                    DividerItemDecoration.VERTICAL
+                )
+            )
+            setHasFixedSize(true)
         }
+    }
+
+    override fun onClickItem(position: Int) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, ContactEditFragment())
+            .addToBackStack(null)
+            .commit()
     }
 }
