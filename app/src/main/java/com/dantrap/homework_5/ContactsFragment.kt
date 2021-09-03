@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dantrap.homework_5.databinding.FragmentContactsBinding
@@ -15,14 +17,9 @@ class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
     private var _binding: FragmentContactsBinding? = null
     private val binding get() = _binding!!
 
-    private val contactList = listOf(
-        ContactInfo("Aleksandr", "Pushkin", "+79000000001", R.color.purple_500),
-        ContactInfo("Aleksandr", "Pushkin", "+79000000002", R.color.teal_200),
-        ContactInfo("Aleksandr", "Pushkin", "+79000000003", R.color.orange),
-        ContactInfo("Aleksandr", "Pushkin", "+79000000004", R.color.nuclear_waste)
-    )
+    private val viewModel: ContactsViewModel by activityViewModels()
 
-    private val contactAdapter by lazy { ContactsAdapter(contactList, this) }
+    private val contactAdapter by lazy { ContactsAdapter(viewModel.contactList.value!!, this) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +32,12 @@ class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setupRecyclerView()
+
+        viewModel.contactList.observe(viewLifecycleOwner, { data ->
+            contactAdapter.updateData(0, data)
+        })
     }
 
     override fun onDestroyView() {
@@ -58,8 +60,10 @@ class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
     }
 
     override fun onClickItem(position: Int) {
+        val destination = ContactEditFragment()
+        destination.arguments = bundleOf("position" to position)
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container_view, ContactEditFragment())
+            .replace(R.id.fragment_container_view, destination)
             .addToBackStack(null)
             .commit()
     }

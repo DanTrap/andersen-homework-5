@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dantrap.homework_5.databinding.ItemContactBinding
 
 class ContactsAdapter(
-    private val contactList: List<ContactInfo>,
+    private var contactList: MutableList<ContactInfo>,
     private val listener: OnContactClickListener
 ) :
     RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemBinding =
@@ -24,6 +25,11 @@ class ContactsAdapter(
     }
 
     override fun getItemCount(): Int = contactList.size
+
+    fun updateData(position: Int, data: MutableList<ContactInfo>?) {
+        contactList = data!!
+        notifyItemChanged(position)
+    }
 
     inner class ViewHolder(private val itemBinding: ItemContactBinding) :
         RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener {

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp" >
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/person_image"
@@ -14,6 +14,7 @@
         android:background="@drawable/bg_contact"
         android:padding="8dp"
         android:contentDescription="@string/person_photo"
+        app:tint="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:backgroundTint="@color/orange"/>
