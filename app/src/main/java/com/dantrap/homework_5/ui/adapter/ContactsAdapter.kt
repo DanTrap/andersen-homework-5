@@ -1,10 +1,11 @@
-package com.dantrap.homework_5
+package com.dantrap.homework_5.ui.adapter
 
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dantrap.homework_5.data.ContactInfo
 import com.dantrap.homework_5.databinding.ItemContactBinding
 
 class ContactsAdapter(

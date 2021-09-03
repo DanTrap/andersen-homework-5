@@ -1,4 +1,4 @@
-package com.dantrap.homework_5
+package com.dantrap.homework_5.ui.fragment
 
 import android.app.Activity
 import android.content.Context
@@ -12,7 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dantrap.homework_5.R
 import com.dantrap.homework_5.databinding.FragmentContactsBinding
+import com.dantrap.homework_5.ui.adapter.ContactsAdapter
+import com.dantrap.homework_5.ContactsViewModel
 
 class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
 
@@ -40,7 +43,7 @@ class ContactsFragment : Fragment(), ContactsAdapter.OnContactClickListener {
         setupRecyclerView()
 
         viewModel.contactList.observe(viewLifecycleOwner, { data ->
-            contactAdapter.updateData(0, data)
+            contactAdapter.updateData(viewModel.updatedPosition, data)
         })
     }
 
