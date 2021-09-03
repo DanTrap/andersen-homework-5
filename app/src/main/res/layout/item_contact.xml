@@ -12,7 +12,8 @@
         android:id="@+id/row_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="?android:attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/person_image"
