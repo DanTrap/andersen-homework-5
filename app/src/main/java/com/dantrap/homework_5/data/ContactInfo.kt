@@ -1,4 +1,6 @@
-package com.dantrap.homework_5
+package com.dantrap.homework_5.data
+
+import com.dantrap.homework_5.R
 
 data class ContactInfo(
     val firstName: String,

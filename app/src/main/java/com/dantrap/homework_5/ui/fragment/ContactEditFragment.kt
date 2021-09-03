@@ -1,4 +1,4 @@
-package com.dantrap.homework_5
+package com.dantrap.homework_5.ui.fragment
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.dantrap.homework_5.data.ContactInfo
 import com.dantrap.homework_5.databinding.FragmentEditContactBinding
+import com.dantrap.homework_5.ContactsViewModel
 
 class ContactEditFragment : Fragment() {
 
@@ -72,7 +74,7 @@ class ContactEditFragment : Fragment() {
     private fun checkFields() {
         with(binding) {
             saveButton.isEnabled =
-                numberEdit.text.isNotEmpty() and firstNameEdit.text.isNotEmpty() and secondNameEdit.text.isNotEmpty()
+                numberEdit.text.isNotBlank() and firstNameEdit.text.isNotBlank() and secondNameEdit.text.isNotBlank()
         }
     }
 
@@ -85,4 +87,5 @@ class ContactEditFragment : Fragment() {
                 ColorStateList.valueOf(resources.getColor(contact.iconBackground))
         }
     }
+
 }
